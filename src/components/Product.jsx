@@ -1,9 +1,10 @@
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
-import { addWishlist } from '../redux/wishlistRedux';
+import { addWishlist, removeWishlist } from '../redux/wishlistRedux';
+import { pink } from '@mui/material/colors';
 
 
 const Image = styled.img`
@@ -96,12 +97,19 @@ const Container = styled.div`
 
 const Product = ({item}) => {
 
+  const [wishlist, setWishlist] = useState(item.wishlist);
+
 
   const dispatch = useDispatch()
 
   const handleWishlist = ()=>{
     dispatch(addWishlist({...item}))
+    setWishlist(true);
   }
+  const handleRemoveWishlist = () => {
+    dispatch(removeWishlist(item._id));
+    setWishlist(false);
+  };
 
   return (
     <Container>
@@ -119,7 +127,14 @@ const Product = ({item}) => {
             </Link>
           </Icon>
           <Icon>
-            <FavoriteBorderOutlined onClick={handleWishlist} />
+            {wishlist ? (
+              <FavoriteBorderOutlined
+                style={{ color: "pink" }}
+                onClick={handleRemoveWishlist}
+              />
+            ) : (
+              <FavoriteBorderOutlined onClick={handleWishlist} />
+            )}
           </Icon>
         </Icons>
         <Price>${item.price}</Price>

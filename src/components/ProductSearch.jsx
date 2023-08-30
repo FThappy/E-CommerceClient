@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Product from './Product'
 import axios from "axios";
+import { useSelector } from 'react-redux';
 
 
 
@@ -25,6 +26,8 @@ const ProductSearch = ({filter,sort,search}) => {
   console.log(search)
   const [products,setProducts] = useState([])
   const [filteredProducts,setFilteredProducts] = useState([])
+  const wishlist = useSelector((state) => state.wishlist.products);
+  const isFetching = useSelector((state) => state.wishlist.isFetching);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -34,13 +37,35 @@ const ProductSearch = ({filter,sort,search}) => {
             ? `http://localhost:5000/api/product/searchs/?search=${search}`
             : "http://localhost:5000/api/product/findall"
         );
+        
         setProducts(res.data);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     };
     getProducts();
   }, [search]);
+
+  console.log(products)
+  
+  useEffect(() => {
+    const product = products.map((item) => {
+      const newWishList = wishlist.find(
+        (wishItem) => wishItem._id === item._id
+      );
+      if (newWishList) {
+        return {
+          ...item,
+          wishlist: true,
+        };
+      }
+      return item;
+    });
+    setProducts(product);
+  }, [wishlist]);
+
+  
+  
 
   useEffect(()=>{
       setFilteredProducts(

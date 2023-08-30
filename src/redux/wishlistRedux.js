@@ -5,14 +5,27 @@ const wishlistSlice = createSlice({
   initialState: {
     products: [],
     quantity: 0,
+    isFetching: "none",
   },
   reducers: {
     addWishlist: (state, action) => {
       state.quantity += 1;
-      state.products.push(action.payload);
+      const productWithWishlist = {
+        ...action.payload,
+        wishlist: true,
+      };
+      state.products.push(productWithWishlist);
+      state.isFetching = "Add"
+    },
+    removeWishlist: (state, action) => {
+      state.quantity -= 1;
+      state.products = state.products.filter(
+        (item) => item._id !== action.payload
+      );
+      state.isFetching="Remove"
     },
   },
 });
 
-export const { addWishlist } = wishlistSlice.actions;
+export const { addWishlist, removeWishlist } = wishlistSlice.actions;
 export default wishlistSlice.reducer;
