@@ -169,7 +169,7 @@ const Cart = () => {
     size : item.size,
     color : item.color,
     price : item.price,
-    quanity: item.quantity,
+    quantity: item.quantity,
   }));
  
 
@@ -196,14 +196,14 @@ const Cart = () => {
         console.log(order);
         const postOrder = async () => {
           try {
-            const res = await userRequest.post("/order", order);
+            const res = await publicRequest.post("/order", order);
           } catch (err) {
             console.log(err);
           }
         };
         postOrder();
         dispatch(removeProduct(cart));
-        // navigate("/success", { state: { data: res.data } });
+        navigate("/success", { state: { data: res.data } });
       } catch(error) {
         console.log(error)
       }
