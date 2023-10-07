@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Product from './Product'
-import { popularProducts } from '../data'
 import axios from "axios";
 
 
@@ -26,7 +25,7 @@ const ProductHome = () => {
 
 
   const [products,setProducts] = useState([])
-  const [filteredProducts,setFilteredProducts] = useState([])
+
 
   useEffect(() => {
     const getProducts = async () => {

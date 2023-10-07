@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const wishlistSlice = createSlice({
-  name: "wishlist",
+  name: "wishlists",
   initialState: {
     products: [],
     quantity: 0,

@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 import { addWishlist, removeWishlist } from '../redux/wishlistRedux';
-import { pink } from '@mui/material/colors';
 
 
 const Image = styled.img`
