@@ -29,7 +29,7 @@ export const categories = [
   },
   {
     id: 2,
-    img: "https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/461360/sub/goods_461360_sub11.jpg?width=750",
+    img: "https://im.uniqlo.com/global-cms/spa/res32efab16cbe8dd6db58b7e0b020f1f88fr.jpg",
     title: " Women Fashion ",
     cat: "women",
   },
